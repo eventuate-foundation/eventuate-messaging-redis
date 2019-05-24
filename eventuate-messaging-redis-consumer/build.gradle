@@ -1,0 +1,12 @@
+apply plugin: PublicModulePlugin
+
+dependencies {
+    compile "io.eventuate.common.messaging:eventuate-common-messaging:$eventuateCommonMessagingVersion"
+    compile project (':eventuate-messaging-redis-coordination-leadership')
+
+    testCompile 'com.google.guava:guava:19.0'
+    testCompile "io.eventuate.util:eventuate-util-test:$eventuateUtilVersion"
+    testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+}
+
+
