@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = TramConsumerRedisConfiguration.class)
+@SpringBootTest(classes = MessageConsumerRedisConfiguration.class)
 public class MessageConsumerRedisImplTest {
 
   @Autowired

@@ -2,7 +2,7 @@ package io.eventuate.messaging.redis.consumer;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import io.eventuate.common.messaging.Assignment;
+import io.eventuate.messaging.partition.management.Assignment;
 import io.eventuate.messaging.redis.common.CommonRedisConfiguration;
 import org.junit.Assert;
 import org.junit.Before;

@@ -1,9 +1,9 @@
 package io.eventuate.messaging.redis.integrationtests;
 
 import com.google.common.collect.ImmutableSet;
-import io.eventuate.common.messaging.AbstractMessagingTest;
-import io.eventuate.common.messaging.CoordinatorFactory;
-import io.eventuate.common.messaging.CoordinatorFactoryImpl;
+import io.eventuate.messaging.partition.management.CoordinatorFactory;
+import io.eventuate.messaging.partition.management.CoordinatorFactoryImpl;
+import io.eventuate.messaging.partition.management.tests.AbstractMessagingTest;
 import io.eventuate.messaging.redis.common.CommonRedisConfiguration;
 import io.eventuate.messaging.redis.common.RedissonClients;
 import io.eventuate.messaging.redis.consumer.*;

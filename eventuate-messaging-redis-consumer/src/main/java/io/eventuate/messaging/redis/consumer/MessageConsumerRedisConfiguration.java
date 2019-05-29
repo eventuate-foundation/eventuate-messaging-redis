@@ -1,6 +1,6 @@
 package io.eventuate.messaging.redis.consumer;
 
-import io.eventuate.common.messaging.*;
+import io.eventuate.messaging.partition.management.*;
 import io.eventuate.coordination.leadership.LeaderSelectorFactory;
 import io.eventuate.messaging.redis.common.CommonRedisConfiguration;
 import io.eventuate.messaging.redis.common.RedisConfigurationProperties;
@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.redis.core.RedisTemplate;
 
 @Configuration
-@Import({/*TramConsumerCommonConfiguration.class,*/ CommonRedisConfiguration.class})
-public class TramConsumerRedisConfiguration {
+@Import(CommonRedisConfiguration.class)
+public class MessageConsumerRedisConfiguration {
 
   @Bean
   public MessageConsumerRedisImpl messageConsumer(RedisTemplate<String, String> redisTemplate,
