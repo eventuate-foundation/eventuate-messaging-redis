@@ -1,0 +1,5 @@
+include 'eventuate-messaging-redis-common'
+include 'eventuate-messaging-redis-consumer'
+include 'eventuate-messaging-redis-coordination-leadership'
+include 'eventuate-messaging-redis-integration-tests'
+include 'eventuate-messaging-redis-producer'
