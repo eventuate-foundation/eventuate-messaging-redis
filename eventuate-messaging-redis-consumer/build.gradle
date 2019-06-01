@@ -1,7 +1,7 @@
 apply plugin: PublicModulePlugin
 
 dependencies {
-    compile "io.eventuate.messaging.partition.management:eventuate-messaging-partition-management:$eventuateMessagingPartitionManagementVersion"
+    compile "io.eventuate.common.messaging:eventuate-messaging-partition-management:$eventuateMessagingPartitionManagementVersion"
     compile project (':eventuate-messaging-redis-coordination-leadership')
     compile "io.eventuate.common:eventuate-common-json-mapper:$eventuateCommonVersion"
 
