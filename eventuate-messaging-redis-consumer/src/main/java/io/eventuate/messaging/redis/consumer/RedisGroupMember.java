@@ -1,6 +1,6 @@
 package io.eventuate.messaging.redis.consumer;
 
-import io.eventuate.messaging.partition.management.GroupMember;
+import io.eventuate.messaging.partitionmanagement.GroupMember;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.Timer;

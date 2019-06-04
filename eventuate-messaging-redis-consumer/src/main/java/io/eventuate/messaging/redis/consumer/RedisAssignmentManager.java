@@ -1,8 +1,8 @@
 package io.eventuate.messaging.redis.consumer;
 
 import io.eventuate.common.json.mapper.JSonMapper;
-import io.eventuate.messaging.partition.management.Assignment;
-import io.eventuate.messaging.partition.management.AssignmentManager;
+import io.eventuate.messaging.partitionmanagement.Assignment;
+import io.eventuate.messaging.partitionmanagement.AssignmentManager;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.concurrent.TimeUnit;

@@ -1,6 +1,6 @@
 package io.eventuate.messaging.redis.consumer;
 
-import io.eventuate.messaging.partition.management.*;
+import io.eventuate.messaging.partitionmanagement.*;
 import io.eventuate.coordination.leadership.LeaderSelectorFactory;
 import io.eventuate.messaging.redis.common.CommonRedisConfiguration;
 import io.eventuate.messaging.redis.common.RedisConfigurationProperties;
