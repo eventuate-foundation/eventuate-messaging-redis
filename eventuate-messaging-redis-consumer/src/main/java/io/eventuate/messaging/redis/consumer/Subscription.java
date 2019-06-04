@@ -1,6 +1,6 @@
 package io.eventuate.messaging.redis.consumer;
 
-import io.eventuate.messaging.partition.management.*;
+import io.eventuate.messaging.partitionmanagement.*;
 import io.eventuate.messaging.redis.common.RedisUtil;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;

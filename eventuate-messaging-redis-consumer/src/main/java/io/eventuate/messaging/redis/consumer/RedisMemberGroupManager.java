@@ -1,6 +1,6 @@
 package io.eventuate.messaging.redis.consumer;
 
-import io.eventuate.messaging.partition.management.MemberGroupManager;
+import io.eventuate.messaging.partitionmanagement.MemberGroupManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
