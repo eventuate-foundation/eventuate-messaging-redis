@@ -5,7 +5,7 @@ dependencies {
     compile project(":eventuate-messaging-redis-producer")
     compile "io.eventuate.util:eventuate-util-test:$eventuateUtilVersion"
     testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
-    testCompile "io.eventuate.messaging.partition.management:eventuate-messaging-partition-management-tests:$eventuateMessagingPartitionManagementVersion"
+    testCompile "io.eventuate.common.messaging:eventuate-messaging-partition-management-tests:$eventuateMessagingPartitionManagementVersion"
 }
 
 test {
