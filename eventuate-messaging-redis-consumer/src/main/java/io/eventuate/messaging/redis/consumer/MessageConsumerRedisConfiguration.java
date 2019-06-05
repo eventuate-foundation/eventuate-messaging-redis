@@ -16,7 +16,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 public class MessageConsumerRedisConfiguration {
 
   @Bean
-  public MessageConsumerRedisImpl messageConsumer(RedisTemplate<String, String> redisTemplate,
+  public MessageConsumerRedisImpl messageConsumerRedis(RedisTemplate<String, String> redisTemplate,
                                          CoordinatorFactory coordinatorFactory,
                                          RedisConfigurationProperties redisConfigurationProperties) {
 
