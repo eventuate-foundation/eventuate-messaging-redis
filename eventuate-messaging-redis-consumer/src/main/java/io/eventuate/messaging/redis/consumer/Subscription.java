@@ -57,7 +57,7 @@ public class Subscription {
             subscriptionId,
             this::assignmentUpdated,
             RedisKeyUtil.keyForLeaderLock(subscriberId),
-            () -> leaderHook.ifPresent(hook -> hook.leaderUpdated(true, subscriptionId)),
+            (leadershipController) -> leaderHook.ifPresent(hook -> hook.leaderUpdated(true, subscriptionId)),
             () -> leaderHook.ifPresent(hook -> hook.leaderUpdated(false, subscriptionId)));
 
     logger.info("subscription created (channels = {}, {})", channels, identificationInformation());

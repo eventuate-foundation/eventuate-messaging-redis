@@ -1,5 +1,6 @@
 package io.eventuate.messaging.redis.leadership;
 
+import io.eventuate.coordination.leadership.LeaderSelectedCallback;
 import io.eventuate.coordination.leadership.tests.AbstractLeadershipTest;
 import io.eventuate.coordination.leadership.tests.LeaderSelectorTestingWrap;
 import io.eventuate.messaging.redis.common.CommonRedisConfiguration;
@@ -50,7 +51,8 @@ public class LeadershipTest extends AbstractLeadershipTest<RedisLeaderSelector> 
   }
 
   @Override
-  protected RedisLeaderSelector createLeaderSelector(Runnable leaderSelectedCallback, Runnable leaderRemovedCallback) {
+  protected RedisLeaderSelector createLeaderSelector(LeaderSelectedCallback leaderSelectedCallback,
+                                                     Runnable leaderRemovedCallback) {
     return new RedisLeaderSelector(redissonClients,
             String.format("some:path:%s", groupId),
             String.format("[groupId: %s, memberId: %s]", groupId, memberId),

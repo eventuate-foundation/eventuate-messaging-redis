@@ -1,6 +1,7 @@
 package io.eventuate.messaging.redis.leadership;
 
 import io.eventuate.coordination.leadership.EventuateLeaderSelector;
+import io.eventuate.coordination.leadership.LeaderSelectedCallback;
 import io.eventuate.messaging.redis.common.RedissonClients;
 import org.redisson.RedissonRedLock;
 import org.redisson.api.RLock;
@@ -19,7 +20,7 @@ public class RedisLeaderSelector implements EventuateLeaderSelector {
   private String lockId;
   private String leaderId;
   private long lockTimeInMilliseconds;
-  private Runnable leaderSelectedCallback;
+  private LeaderSelectedCallback leaderSelectedCallback;
   private Runnable leaderRemovedCallback;
   private RedissonRedLock lock;
   private volatile boolean locked = false;
@@ -32,7 +33,7 @@ public class RedisLeaderSelector implements EventuateLeaderSelector {
   public RedisLeaderSelector(RedissonClients redissonClients,
                              String lockId,
                              long lockTimeInMilliseconds,
-                             Runnable leaderSelectedCallback,
+                             LeaderSelectedCallback leaderSelectedCallback,
                              Runnable leaderRemovedCallback) {
 
     this(redissonClients,
@@ -47,7 +48,7 @@ public class RedisLeaderSelector implements EventuateLeaderSelector {
                              String lockId,
                              String leaderId,
                              long lockTimeInMilliseconds,
-                             Runnable leaderSelectedCallback,
+                             LeaderSelectedCallback leaderSelectedCallback,
                              Runnable leaderRemovedCallback) {
 
     this.lockId = lockId;
@@ -135,13 +136,15 @@ public class RedisLeaderSelector implements EventuateLeaderSelector {
 
   private void leaderSelected() {
     leaderThread = new Thread(() -> {
+      CountDownLatch stopCountDownLatch = new CountDownLatch(1);
       try {
         logger.info("Calling leaderSelectedCallback, leaderId : {}", leaderId);
-        leaderSelectedCallback.run();
+        leaderSelectedCallback.run(new RedisLeadershipController(stopCountDownLatch));
         logger.info("Called leaderSelectedCallback, leaderId : {}", leaderId);
-        Thread.sleep(Long.MAX_VALUE);
+        stopCountDownLatch.await();
       } catch (Exception e) {
         logger.error(e.getMessage(), e);
+      } finally {
         leaderRemoved();
         lock.unlock();
         locked = false;
