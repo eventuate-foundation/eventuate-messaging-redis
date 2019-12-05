@@ -1,6 +1,5 @@
 package io.eventuate.messaging.redis.integrationtests;
 
-import com.google.common.collect.ImmutableSet;
 import io.eventuate.messaging.partitionmanagement.CoordinatorFactory;
 import io.eventuate.messaging.partitionmanagement.CoordinatorFactoryImpl;
 import io.eventuate.messaging.partitionmanagement.tests.AbstractMessagingTest;
@@ -19,7 +18,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.concurrent.*;
+import java.util.Collections;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MessagingTest.Config.class)
@@ -44,7 +44,7 @@ public class MessagingTest extends AbstractMessagingTest {
 
     MessageConsumerRedisImpl consumer = createConsumer(partitionCount);
 
-    consumer.subscribe(subscriberId, ImmutableSet.of(destination), message ->
+    consumer.subscribe(subscriberId, Collections.singleton(destination), message ->
             messageQueue.add(Integer.parseInt(message.getPayload())));
 
     TestSubscription testSubscription = new TestSubscription(consumer, messageQueue);

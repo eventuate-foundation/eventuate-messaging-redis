@@ -13,10 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = CommonRedisConfiguration.class)
@@ -63,7 +60,7 @@ public class AssignmentManagingTest {
 
   private Assignment createAssignment() {
     String channel = UUID.randomUUID().toString();
-    return new Assignment(ImmutableSet.of(channel), ImmutableMap.of(channel, ImmutableSet.of(0, 1)));
+    return new Assignment(Collections.singleton(channel), Collections.singletonMap(channel, new HashSet<>(Arrays.asList(0, 1))));
   }
 
   private RedisAssignmentManager createRedisAssignmentManager() {
