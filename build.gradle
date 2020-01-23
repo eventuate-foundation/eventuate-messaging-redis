@@ -35,7 +35,6 @@ subprojects {
     repositories {
         mavenCentral()
         jcenter()
-        maven { url "https://repo.spring.io/milestone" }
         eventuateMavenRepoUrl.split(',').each { repoUrl -> maven { url repoUrl } }
     }
 
