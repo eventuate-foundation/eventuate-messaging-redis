@@ -42,53 +42,56 @@ public class ChannelProcessor {
     this.timeInMillisecondsToSleepWhenKeyDoesNotExist = timeInMillisecondsToSleepWhenKeyDoesNotExist;
     this.blockStreamTimeInMilliseconds = blockStreamTimeInMilliseconds;
 
-    logger.info("channel processor is created (channel = {}, {})", channel, subscriptionIdentificationInfo);
+    logger.info("Channel processor is created (channel = {}, {})", channel, subscriptionIdentificationInfo);
   }
 
   public void process() {
     try {
-      logger.info("channel processor started processing (channel = {}, {})", channel, subscriptionIdentificationInfo);
+      logger.info("Channel processor started processing (channel = {}, {})", channel, subscriptionIdentificationInfo);
       running.set(true);
       makeSureConsumerGroupExists();
       processPendingRecords();
       processRegularRecords();
       stopCountDownLatch.countDown();
-      logger.info("channel processor finished processing (channel = {}, {})", channel, subscriptionIdentificationInfo);
+      logger.info("Channel processor finished processing (channel = {}, {})", channel, subscriptionIdentificationInfo);
     } catch (Throwable e) {
-      logger.error("ChannelProcessor got error: " + channel  + ", " + subscriberId, e);
+      logger.error("Channel processor got error: (channel = {}, subscriberId = {})", channel, subscriberId);
+      logger.error("Channel processor got error", e);
       throw e;
     }
   }
 
   public void stop() {
+    logger.info("stopping channel (channel = {}, {})", channel, subscriptionIdentificationInfo);
     running.set(false);
     try {
       stopCountDownLatch.await();
+      logger.info("Stopped channel (channel = {}, {})", channel, subscriptionIdentificationInfo);
     } catch (InterruptedException e) {
+      logger.error("Stopping channel failed (channel = {}, {})", channel, subscriptionIdentificationInfo);
+      logger.error("Stopping channel failed", e);
       throw new RuntimeException(e);
     }
-
-    logger.info("channel processor stopped processing (channel = {}, {})", channel, subscriptionIdentificationInfo);
   }
 
   private void makeSureConsumerGroupExists() {
-    logger.trace("Ensuring consumer group exists {} {}", channel, subscriberId);
+    logger.info("Ensuring consumer group exists {} {}", channel, subscriberId);
     while (running.get()) {
       try {
-        logger.trace("Creating group {} {}", channel, subscriberId);
+        logger.info("Creating group {} {}", channel, subscriberId);
         redisTemplate.opsForStream().createGroup(channel, ReadOffset.from("0"), subscriberId);
-        logger.trace("Ensured consumer group exists {}", channel);
+        logger.info("Ensured consumer group exists {}", channel);
         return;
       } catch (RedisSystemException e) {
         if (isKeyDoesNotExist(e)) {
-          logger.trace("Stream {} does not exist!", channel);
+          logger.info("Stream {} does not exist!", channel);
           sleep(timeInMillisecondsToSleepWhenKeyDoesNotExist);
           continue;
         } else if (isGroupExistsAlready(e)) {
-          logger.trace("Ensured consumer group exists {}", channel);
+          logger.info("Ensured consumer group exists {}", channel);
           return;
         }
-        logger.trace("Got exception ensuring consumer group exists: " + channel, e);
+        logger.error("Got exception ensuring consumer group exists: " + channel, e);
         throw e;
       }
     }
@@ -111,7 +114,7 @@ public class ChannelProcessor {
   }
 
   private void processPendingRecords() {
-    logger.trace("Processing pending records {}", channel);
+    logger.info("Processing pending records {}", channel);
     while (running.get()) {
       List<MapRecord<String, Object, Object>> pendingRecords = getPendingRecords();
 
@@ -121,6 +124,7 @@ public class ChannelProcessor {
 
       processRecords(pendingRecords);
     }
+    logger.info("Processing pending records finished {}", channel);
   }
 
   private void processRegularRecords() {
@@ -128,6 +132,7 @@ public class ChannelProcessor {
     while (running.get()) {
       processRecords(getUnprocessedRecords());
     }
+    logger.trace("Processing regular records finished {}", channel);
   }
 
   private void processRecords(List<MapRecord<String, Object, Object>> records) {
@@ -139,14 +144,14 @@ public class ChannelProcessor {
   }
 
   private void processMessage(String message, RecordId recordId) {
-    logger.trace("channel processor {} with channel {} got message: {}", subscriptionIdentificationInfo, channel, message);
+    logger.trace("Channel processor {} with channel {} got message: {}", subscriptionIdentificationInfo, channel, message);
 
     try {
-      logger.trace("invoked message handler");
+      logger.trace("Invoked message handler");
       messageHandler.accept(new RedisMessage(message));
-      logger.trace("message handler invoked");
+      logger.trace("Message handler invoked");
     } catch (Throwable t) {
-      logger.error(t.getMessage(), t);
+      logger.error("Message processing failed", t);
       stopCountDownLatch.countDown();
       throw t;
     }
@@ -178,7 +183,7 @@ public class ChannelProcessor {
     try {
       Thread.sleep(timeoutInMilliseconds);
     } catch (Exception e) {
-      logger.error(e.getMessage(), e);
+      logger.error("Sleeping failed", e);
       throw new RuntimeException(e);
     }
   }
