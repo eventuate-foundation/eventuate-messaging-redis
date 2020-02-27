@@ -3,6 +3,8 @@ package io.eventuate.messaging.redis.consumer;
 import io.eventuate.common.json.mapper.JSonMapper;
 import io.eventuate.messaging.partitionmanagement.Assignment;
 import io.eventuate.messaging.partitionmanagement.AssignmentListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.Optional;
@@ -11,6 +13,8 @@ import java.util.TimerTask;
 import java.util.function.Consumer;
 
 public class RedisAssignmentListener implements AssignmentListener {
+  private Logger logger = LoggerFactory.getLogger(getClass());
+
   private RedisTemplate<String, String> redisTemplate;
   private Consumer<Assignment> assignmentUpdatedCallback;
   private long assignmentListenerInterval;
@@ -38,12 +42,21 @@ public class RedisAssignmentListener implements AssignmentListener {
   }
 
   private void scheduleAssignmentCheck() {
+    logger.info("Scheduling assignment check, key = {}", assignmentKey);
+
     timer.schedule(new TimerTask() {
       @Override
       public void run() {
-        checkAssignmentUpdate();
+        try {
+          checkAssignmentUpdate();
+        } catch (Exception e) {
+          logger.error("Assignment check failed, key = {}", assignmentKey);
+          logger.error("Assignment check failed", e);
+        }
       }
     }, 0, assignmentListenerInterval);
+
+    logger.info("Scheduled assignment check, key = {}", assignmentKey);
   }
 
   private void checkAssignmentUpdate() {
@@ -62,6 +75,8 @@ public class RedisAssignmentListener implements AssignmentListener {
   }
 
   public void remove() {
+    logger.info("Removing assignment check, key = {}", assignmentKey);
     timer.cancel();
+    logger.info("Removed assignment check, key = {}", assignmentKey);
   }
 }

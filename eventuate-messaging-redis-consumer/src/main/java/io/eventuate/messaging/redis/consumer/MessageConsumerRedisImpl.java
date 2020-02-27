@@ -57,7 +57,7 @@ public class MessageConsumerRedisImpl implements CommonMessageConsumer {
 
   public Subscription subscribe(String subscriberId, Set<String> channels, RedisMessageHandler handler) {
 
-    logger.info("consumer subscribes to channels (consumer id = {}, subscriber id {}, channels = {})", consumerId, subscriberId, channels);
+    logger.info("Consumer subscribes to channels (consumer id = {}, subscriber id {}, channels = {})", consumerId, subscriberId, channels);
 
     Subscription subscription = new Subscription(subscriptionIdSupplier.get(),
             consumerId,
@@ -73,6 +73,8 @@ public class MessageConsumerRedisImpl implements CommonMessageConsumer {
 
     subscription.setClosingCallback(() -> subscriptions.remove(subscription));
 
+    logger.info("Consumer subscribed to channels (consumer id = {}, subscriber id {}, channels = {})", consumerId, subscriberId, channels);
+
     return subscription;
   }
 
@@ -86,8 +88,10 @@ public class MessageConsumerRedisImpl implements CommonMessageConsumer {
 
   @Override
   public void close() {
+    logger.info("Closing consumer (consumer id = {})", consumerId);
     subscriptions.forEach(Subscription::close);
     subscriptions.clear();
+    logger.info("Closed consumer (consumer id = {})", consumerId);
   }
 
   public String getId() {
