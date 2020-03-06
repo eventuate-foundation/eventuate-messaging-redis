@@ -27,7 +27,7 @@ subprojects {
             repo = "eventuate-maven-$bintrayRepoType"
             name = 'eventuate-messaging-redis'
             licenses = ['Apache-2.0']
-            vcsUrl = 'https://github.com/eventuate-incubator/eventuate-messaging-redis.git'
+            vcsUrl = 'https://github.com/eventuate-foundation/eventuate-messaging-redis'
         }
     }
 
