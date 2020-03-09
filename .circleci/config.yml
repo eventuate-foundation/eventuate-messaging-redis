@@ -6,7 +6,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: eventuate-messaging-redis-{{ checksum "gradle.properties" }}
+          keys:
+            - eventuate-messaging-redis-{{ checksum "gradle.properties" }}
+            - eventuate-messaging-redis-
       - run: TERM=dumb ./gradlew testClasses
       - save_cache:
           paths:
