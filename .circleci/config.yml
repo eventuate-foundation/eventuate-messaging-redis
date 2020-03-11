@@ -9,7 +9,7 @@ jobs:
           keys:
             - eventuate-messaging-redis-{{ checksum "gradle.properties" }}
             - eventuate-messaging-redis-
-      - run: TERM=dumb ./gradlew testClasses
+      - run: TERM=dumb ./gradlew testClasses aggregateJavaDocs
       - save_cache:
           paths:
             - ~/.gradle
