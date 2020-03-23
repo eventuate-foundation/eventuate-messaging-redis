@@ -1,6 +1,0 @@
-apply plugin: PublicModulePlugin
-
-dependencies {
-    compile project(":eventuate-messaging-redis-common")
-}
-

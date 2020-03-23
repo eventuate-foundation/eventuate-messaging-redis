@@ -1,0 +1,13 @@
+apply plugin: PublicModulePlugin
+
+dependencies {
+    compile "io.eventuate.common.messaging:eventuate-messaging-partition-management:$eventuateMessagingPartitionManagementVersion"
+    compile project (':eventuate-messaging-redis-spring-coordination-leadership')
+    compile "io.eventuate.common:eventuate-common-json-mapper:$eventuateCommonVersion"
+
+    testCompile 'com.google.guava:guava:19.0'
+    testCompile "io.eventuate.util:eventuate-util-test:$eventuateUtilVersion"
+    testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+}
+
+
