@@ -1,3 +1,5 @@
+rootProject.name="eventuate-messaging-redis"
+
 include 'eventuate-messaging-redis-spring-common'
 include 'eventuate-messaging-redis-spring-consumer'
 include 'eventuate-messaging-redis-spring-coordination-leadership'
