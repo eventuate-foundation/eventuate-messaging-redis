@@ -31,11 +31,11 @@ subprojects {
 
     repositories {
         mavenCentral()
-        jcenter()
         eventuateMavenRepoUrl.split(',').each { repoUrl -> maven { url repoUrl } }
     }
 
     dependencies {
+        testImplementation(platform("org.springframework.boot:spring-boot-dependencies:$springBootVersion"))
         testCompile "junit:junit:4.12"
         testCompile "org.mockito:mockito-core:2.23.4"
     }
