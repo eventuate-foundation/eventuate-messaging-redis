@@ -1,5 +1,5 @@
 
 dependencies {
-    compile project(":eventuate-messaging-redis-spring-common")
+    api project(":eventuate-messaging-redis-spring-common")
 }
 

@@ -1,9 +1,9 @@
 
 dependencies {
-    compile "io.eventuate.common:eventuate-common-coordination-leadership:$eventuateCommonVersion"
-    compile project(":eventuate-messaging-redis-spring-common")
+    api "io.eventuate.common:eventuate-common-coordination-leadership:$eventuateCommonVersion"
+    api project(":eventuate-messaging-redis-spring-common")
 
-    testCompile "io.eventuate.common:eventuate-common-coordination-leadership-tests:$eventuateCommonVersion"
-    testCompile 'com.google.guava:guava:19.0'
-    testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+    testImplementation "io.eventuate.common:eventuate-common-coordination-leadership-tests:$eventuateCommonVersion"
+    testImplementation 'com.google.guava:guava:19.0'
+    testImplementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
 }

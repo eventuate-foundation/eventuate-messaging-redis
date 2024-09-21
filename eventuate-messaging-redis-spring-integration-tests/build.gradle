@@ -1,10 +1,10 @@
 
 dependencies {
-    compile project(":eventuate-messaging-redis-spring-consumer")
-    compile project(":eventuate-messaging-redis-spring-producer")
-    compile "io.eventuate.util:eventuate-util-test:$eventuateUtilVersion"
-    testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
-    testCompile "io.eventuate.common.messaging:eventuate-messaging-partition-management-tests:$eventuateMessagingPartitionManagementVersion"
+    api project(":eventuate-messaging-redis-spring-consumer")
+    api project(":eventuate-messaging-redis-spring-producer")
+    api "io.eventuate.util:eventuate-util-test:$eventuateUtilVersion"
+    testImplementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+    testImplementation "io.eventuate.common.messaging:eventuate-messaging-partition-management-tests:$eventuateMessagingPartitionManagementVersion"
 }
 
 test {
