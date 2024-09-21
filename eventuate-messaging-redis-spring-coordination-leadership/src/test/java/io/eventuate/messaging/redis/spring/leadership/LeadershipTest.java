@@ -2,7 +2,7 @@ package io.eventuate.messaging.redis.spring.leadership;
 
 import io.eventuate.coordination.leadership.LeaderSelectedCallback;
 import io.eventuate.coordination.leadership.tests.AbstractLeadershipTest;
-import io.eventuate.coordination.leadership.tests.LeaderSelectorTestingWrap;
+import io.eventuate.coordination.leadership.tests.SelectorUnderTest;
 import io.eventuate.messaging.redis.spring.common.CommonRedisConfiguration;
 import io.eventuate.messaging.redis.spring.common.RedissonClients;
 import org.junit.Before;
@@ -32,15 +32,15 @@ public class LeadershipTest extends AbstractLeadershipTest<RedisLeaderSelector> 
 
   @Test
   public void testThatLeaderChangedWhenExpired() {
-    LeaderSelectorTestingWrap<RedisLeaderSelector> leaderSelectorTestingWrap1 = createAndStartLeaderSelector();
-    LeaderSelectorTestingWrap<RedisLeaderSelector> leaderSelectorTestingWrap2 = createAndStartLeaderSelector();
+    SelectorUnderTest<RedisLeaderSelector> leaderSelectorTestingWrap1 = createAndStartLeaderSelector();
+    SelectorUnderTest<RedisLeaderSelector> leaderSelectorTestingWrap2 = createAndStartLeaderSelector();
 
     eventuallyAssertLeadershipIsAssignedOnlyForOneSelector(leaderSelectorTestingWrap1, leaderSelectorTestingWrap2);
 
-    LeaderSelectorTestingWrap<RedisLeaderSelector> instanceWhichBecameLeaderFirst =
+    SelectorUnderTest<RedisLeaderSelector> instanceWhichBecameLeaderFirst =
             leaderSelectorTestingWrap1.isLeader() ? leaderSelectorTestingWrap1 : leaderSelectorTestingWrap2;
 
-    LeaderSelectorTestingWrap<RedisLeaderSelector> instanceWhichBecameLeaderLast =
+    SelectorUnderTest<RedisLeaderSelector> instanceWhichBecameLeaderLast =
             leaderSelectorTestingWrap2.isLeader() ? leaderSelectorTestingWrap1 : leaderSelectorTestingWrap2;
 
     instanceWhichBecameLeaderFirst.getSelector().stopRefreshing();
