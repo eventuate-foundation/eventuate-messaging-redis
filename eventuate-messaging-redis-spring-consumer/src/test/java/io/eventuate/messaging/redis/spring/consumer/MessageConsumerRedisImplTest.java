@@ -1,5 +1,6 @@
 package io.eventuate.messaging.redis.spring.consumer;
 
+import io.eventuate.messaging.redis.spring.common.EventuateRedisTemplate;
 import io.eventuate.messaging.redis.spring.common.RedisConfigurationProperties;
 import io.eventuate.messaging.redis.spring.common.RedisUtil;
 import io.eventuate.util.test.async.Eventually;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.connection.stream.ReadOffset;
 import org.springframework.data.redis.connection.stream.StreamRecords;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 public class MessageConsumerRedisImplTest {
 
   @Autowired
-  private RedisTemplate<String, String> redisTemplate;
+  private EventuateRedisTemplate redisTemplate;
 
   @Autowired
   private RedisConfigurationProperties redisConfigurationProperties;

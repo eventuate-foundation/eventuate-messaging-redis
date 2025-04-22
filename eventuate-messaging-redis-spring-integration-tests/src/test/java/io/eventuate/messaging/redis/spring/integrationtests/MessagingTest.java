@@ -4,6 +4,7 @@ import io.eventuate.messaging.partitionmanagement.CoordinatorFactory;
 import io.eventuate.messaging.partitionmanagement.CoordinatorFactoryImpl;
 import io.eventuate.messaging.partitionmanagement.tests.AbstractMessagingTest;
 import io.eventuate.messaging.redis.spring.common.CommonRedisConfiguration;
+import io.eventuate.messaging.redis.spring.common.EventuateRedisTemplate;
 import io.eventuate.messaging.redis.spring.common.RedissonClients;
 import io.eventuate.messaging.redis.spring.leadership.RedisLeaderSelector;
 import io.eventuate.messaging.redis.spring.producer.EventuateRedisProducer;
@@ -14,7 +15,6 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -33,7 +33,7 @@ public class MessagingTest extends AbstractMessagingTest {
   }
 
   @Autowired
-  private RedisTemplate<String, String> redisTemplate;
+  private EventuateRedisTemplate redisTemplate;
 
   @Autowired
   private RedissonClients redissonClients;
