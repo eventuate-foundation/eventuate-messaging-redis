@@ -1,6 +1,7 @@
 package io.eventuate.messaging.redis.spring.consumer;
 
 import io.eventuate.messaging.redis.spring.common.CommonRedisConfiguration;
+import io.eventuate.messaging.redis.spring.common.EventuateRedisTemplate;
 import io.eventuate.util.test.async.Eventually;
 import org.junit.Assert;
 import org.junit.Before;
@@ -8,7 +9,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Collections;
@@ -21,7 +21,7 @@ import java.util.UUID;
 public class GroupManagingTest {
 
   @Autowired
-  private RedisTemplate<String, String> redisTemplate;
+  private EventuateRedisTemplate redisTemplate;
 
   private String groupId;
   private String memberId;

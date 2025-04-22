@@ -3,7 +3,6 @@ package io.eventuate.messaging.redis.spring.common;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
@@ -19,17 +18,19 @@ public class CommonRedisConfiguration {
     return new RedisServers(redisConfigurationProperties.getServers());
   }
 
-  @Bean
+  // @Bean Avoid conflicts with org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration.
   public LettuceConnectionFactory lettuceConnectionFactory(RedisServers redisServers) {
     RedisServers.HostAndPort mainServer = redisServers.getHostsAndPorts().get(0);
-    return new LettuceConnectionFactory(mainServer.getHost(), mainServer.getPort());
+    LettuceConnectionFactory factory = new LettuceConnectionFactory( mainServer.getHost( ), mainServer.getPort( ) );
+    factory.afterPropertiesSet();
+    return factory;
   }
 
   @Bean
-  public RedisTemplate<String, String> redisTemplate(LettuceConnectionFactory lettuceConnectionFactory) {
+  public EventuateRedisTemplate eventuateRedisTemplate( RedisServers redisServers) {
     StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-    RedisTemplate<String, String> template = new RedisTemplate<>();
-    template.setConnectionFactory(lettuceConnectionFactory);
+    EventuateRedisTemplate template = new EventuateRedisTemplate();
+    template.setConnectionFactory(lettuceConnectionFactory(redisServers));
     template.setDefaultSerializer(stringRedisSerializer);
     template.setKeySerializer(stringRedisSerializer);
     template.setValueSerializer(stringRedisSerializer);
