@@ -34,7 +34,7 @@ public class RedissonClients {
     Config config = new Config();
     config.useSingleServer().setRetryAttempts(Integer.MAX_VALUE);
     config.useSingleServer().setRetryInterval(100);
-    config.useSingleServer().setAddress(String.format("redis://%s:%s", hostAndPort.getHost(), hostAndPort.getPort()));
+    config.useSingleServer().setAddress("redis://%s:%s".formatted(hostAndPort.getHost(), hostAndPort.getPort()));
     logger.info("Created redisson client");
     RedissonClient redissonClient = Redisson.create(config);
     return redissonClient;

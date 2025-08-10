@@ -2,4 +2,7 @@
 dependencies {
     api project(":eventuate-messaging-redis-spring-common")
 }
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}
 

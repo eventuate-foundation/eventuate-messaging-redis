@@ -2,8 +2,8 @@ package io.eventuate.messaging.redis.spring.consumer;
 
 import io.eventuate.messaging.partitionmanagement.*;
 import io.eventuate.messaging.redis.spring.common.RedisUtil;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -127,7 +127,7 @@ public class Subscription {
   }
 
   private String identificationInformation() {
-    return String.format("(consumerId = %s, subscriptionId = %s, subscriberId = %s)", consumerId, subscriptionId, subscriberId);
+    return "(consumerId = %s, subscriptionId = %s, subscriberId = %s)".formatted(consumerId, subscriptionId, subscriberId);
   }
 
   private static class ChannelPartition {

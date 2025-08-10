@@ -24,8 +24,8 @@ apply plugin: "io.eventuate.plugins.gradle.publish.EventuatePublish"
 subprojects {
     apply plugin: 'java'
 
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+    sourceCompatibility = 17
+    targetCompatibility = 17
 
 
 
@@ -36,8 +36,7 @@ subprojects {
 
     dependencies {
         testImplementation(platform("org.springframework.boot:spring-boot-dependencies:$springBootVersion"))
-        testImplementation "junit:junit:4.12"
-        testImplementation "org.mockito:mockito-core:2.23.4"
+        testImplementation "org.mockito:mockito-core:4.11.0"
     }
 
 
@@ -56,6 +55,9 @@ gradle.projectsEvaluated {
 
 dockerCompose {
     projectName = null
+}
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
 }
 
 

@@ -3,22 +3,19 @@ package io.eventuate.messaging.redis.spring.consumer;
 import io.eventuate.messaging.redis.spring.common.RedisConfigurationProperties;
 import io.eventuate.messaging.redis.spring.common.RedisUtil;
 import io.eventuate.util.test.async.Eventually;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.connection.stream.ReadOffset;
 import org.springframework.data.redis.connection.stream.StreamRecords;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = MessageConsumerRedisConfiguration.class)
 public class MessageConsumerRedisImplTest {
 
@@ -58,9 +55,9 @@ public class MessageConsumerRedisImplTest {
     messageConsumer.subscribe(testInfo.getSubscriberId(), Collections.singleton(testInfo.getChannel()), messages::add);
 
     Eventually.eventually(() -> {
-      Assert.assertEquals(redisConfigurationProperties.getPartitions(), messages.size());
-      Assert.assertEquals(testInfo.getMessage(), messages.get(0).getPayload());
-      Assert.assertEquals(testInfo.getMessage(), messages.get(1).getPayload());
+      Assertions.assertEquals(redisConfigurationProperties.getPartitions(), messages.size());
+      Assertions.assertEquals(testInfo.getMessage(), messages.get(0).getPayload());
+      Assertions.assertEquals(testInfo.getMessage(), messages.get(1).getPayload());
     });
   }
 
@@ -78,8 +75,8 @@ public class MessageConsumerRedisImplTest {
     sendMessage(testInfo.getKey(), testInfo.getMessage(), testInfo.getChannel());
 
     Eventually.eventually(() -> {
-      Assert.assertEquals(1, messages.size());
-      Assert.assertEquals(testInfo.getMessage(), messages.get(0).getPayload());
+      Assertions.assertEquals(1, messages.size());
+      Assertions.assertEquals(testInfo.getMessage(), messages.get(0).getPayload());
     });
 
     messages.clear();
@@ -107,17 +104,16 @@ public class MessageConsumerRedisImplTest {
 
     sendMessage(testInfo.getKey(), testInfo.getMessage(), testInfo.getChannel());
 
-    Eventually.eventually(() -> {
-      Assert.assertEquals(1, messages.size());
-    });
+    Eventually.eventually(() ->
+      Assertions.assertEquals(1, messages.size()));
 
     messageConsumer.close();
   }
 
   private void waitForMessage(List<RedisMessage> messages, String message) {
     Eventually.eventually(60, 500, TimeUnit.MILLISECONDS,() -> {
-      Assert.assertEquals(1, messages.size());
-      Assert.assertEquals(message, messages.get(0).getPayload());
+      Assertions.assertEquals(1, messages.size());
+      Assertions.assertEquals(message, messages.get(0).getPayload());
     });
   }
 

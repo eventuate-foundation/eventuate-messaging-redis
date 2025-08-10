@@ -5,16 +5,13 @@ import io.eventuate.coordination.leadership.tests.AbstractLeadershipTest;
 import io.eventuate.coordination.leadership.tests.SelectorUnderTest;
 import io.eventuate.messaging.redis.spring.common.CommonRedisConfiguration;
 import io.eventuate.messaging.redis.spring.common.RedissonClients;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.UUID;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = CommonRedisConfiguration.class)
 public class LeadershipTest extends AbstractLeadershipTest<RedisLeaderSelector> {
 
@@ -24,7 +21,7 @@ public class LeadershipTest extends AbstractLeadershipTest<RedisLeaderSelector> 
   private String groupId;
   private String memberId;
 
-  @Before
+  @BeforeEach
   public void init() {
     groupId = UUID.randomUUID().toString();
     memberId = UUID.randomUUID().toString();
@@ -54,8 +51,8 @@ public class LeadershipTest extends AbstractLeadershipTest<RedisLeaderSelector> 
   protected RedisLeaderSelector createLeaderSelector(LeaderSelectedCallback leaderSelectedCallback,
                                                      Runnable leaderRemovedCallback) {
     return new RedisLeaderSelector(redissonClients,
-            String.format("some:path:%s", groupId),
-            String.format("[groupId: %s, memberId: %s]", groupId, memberId),
+            "some:path:%s".formatted(groupId),
+            "[groupId: %s, memberId: %s]".formatted(groupId, memberId),
             100,
             leaderSelectedCallback,
             leaderRemovedCallback);

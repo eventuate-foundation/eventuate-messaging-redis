@@ -2,7 +2,7 @@ package io.eventuate.messaging.redis.spring.common;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.springframework.util.StringUtils;
+import org.springframework.util.ObjectUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -53,7 +53,7 @@ public class RedisServers {
   private List<HostAndPort> hostsAndPorts;
 
   public RedisServers(String redisServers) {
-    if (StringUtils.isEmpty(redisServers)) {
+    if (ObjectUtils.isEmpty(redisServers)) {
       throw new IllegalArgumentException("redis servers are empty");
     }
 

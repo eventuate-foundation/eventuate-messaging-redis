@@ -2,21 +2,18 @@ package io.eventuate.messaging.redis.spring.consumer;
 
 import io.eventuate.messaging.redis.spring.common.CommonRedisConfiguration;
 import io.eventuate.util.test.async.Eventually;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = CommonRedisConfiguration.class)
 public class GroupManagingTest {
 
@@ -27,7 +24,7 @@ public class GroupManagingTest {
   private String memberId;
   private Set<String> members;
 
-  @Before
+  @BeforeEach
   public void init() {
     groupId = UUID.randomUUID().toString();
     memberId = UUID.randomUUID().toString();
@@ -89,11 +86,11 @@ public class GroupManagingTest {
   }
 
   private void assertMemberExists() {
-    Assert.assertEquals(1, members.size());
-    Assert.assertTrue(members.contains(memberId));
+    Assertions.assertEquals(1, members.size());
+    Assertions.assertTrue(members.contains(memberId));
   }
 
   private void assertMembersEventuallyEmpty() {
-    Eventually.eventually(() -> Assert.assertTrue(members.isEmpty()));
+    Eventually.eventually(() -> Assertions.assertTrue(members.isEmpty()));
   }
 }

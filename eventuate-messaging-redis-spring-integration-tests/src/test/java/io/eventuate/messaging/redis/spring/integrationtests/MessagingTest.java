@@ -8,7 +8,6 @@ import io.eventuate.messaging.redis.spring.common.RedissonClients;
 import io.eventuate.messaging.redis.spring.leadership.RedisLeaderSelector;
 import io.eventuate.messaging.redis.spring.producer.EventuateRedisProducer;
 import io.eventuate.messaging.redis.spring.consumer.*;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,12 +15,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Collections;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = MessagingTest.Config.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class MessagingTest extends AbstractMessagingTest {

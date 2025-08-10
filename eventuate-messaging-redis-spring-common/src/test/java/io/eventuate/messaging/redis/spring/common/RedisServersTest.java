@@ -1,8 +1,8 @@
 package io.eventuate.messaging.redis.spring.common;
 
 import com.google.common.collect.ImmutableList;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class RedisServersTest {
 
@@ -12,7 +12,7 @@ public class RedisServersTest {
 
     RedisServers redisServers = new RedisServers(servers);
 
-    Assert.assertEquals(redisServers.getHostsAndPorts(),
+    Assertions.assertEquals(redisServers.getHostsAndPorts(),
             ImmutableList.of(new RedisServers.HostAndPort("somehost", 123)));
   }
 
@@ -22,7 +22,7 @@ public class RedisServersTest {
 
     RedisServers redisServers = new RedisServers(servers);
 
-    Assert.assertEquals(redisServers.getHostsAndPorts(),
+    Assertions.assertEquals(redisServers.getHostsAndPorts(),
             ImmutableList.of(new RedisServers.HostAndPort("host1", 1),
                     new RedisServers.HostAndPort("host2", 2),
                     new RedisServers.HostAndPort("host3", 3)));
@@ -34,7 +34,7 @@ public class RedisServersTest {
 
     RedisServers redisServers = new RedisServers(servers);
 
-    Assert.assertEquals(redisServers.getHostsAndPorts(),
+    Assertions.assertEquals(redisServers.getHostsAndPorts(),
             ImmutableList.of(new RedisServers.HostAndPort("host1", 1),
                     new RedisServers.HostAndPort("host2", 2),
                     new RedisServers.HostAndPort("host3", 3)));
