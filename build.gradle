@@ -37,6 +37,8 @@ subprojects {
     dependencies {
         testImplementation(platform("org.springframework.boot:spring-boot-dependencies:$springBootVersion"))
         testImplementation "org.mockito:mockito-core:4.11.0"
+        testImplementation "org.junit.jupiter:junit-jupiter:$junitVersion"
+        testRuntimeOnly "org.junit.platform:junit-platform-launcher:$junitPlatformLauncherVersion"
     }
 
 
