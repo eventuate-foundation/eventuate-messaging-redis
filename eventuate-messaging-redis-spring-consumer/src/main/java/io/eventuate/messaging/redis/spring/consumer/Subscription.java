@@ -7,6 +7,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,7 +20,7 @@ public class Subscription {
 
   private final String subscriptionId;
   private String consumerId;
-  private RedisTemplate<String, String> redisTemplate;
+  private StringRedisTemplate redisTemplate;
   private String subscriberId;
   private RedisMessageHandler handler;
   private long timeInMillisecondsToSleepWhenKeyDoesNotExist;
@@ -34,7 +35,7 @@ public class Subscription {
 
   public Subscription(String subscriptionId,
                       String consumerId,
-                      RedisTemplate<String, String> redisTemplate,
+                      StringRedisTemplate redisTemplate,
                       String subscriberId,
                       Set<String> channels,
                       RedisMessageHandler handler,

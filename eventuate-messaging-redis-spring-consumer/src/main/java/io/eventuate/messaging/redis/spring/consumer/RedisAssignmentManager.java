@@ -6,16 +6,17 @@ import io.eventuate.messaging.partitionmanagement.AssignmentManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.util.concurrent.TimeUnit;
 
 public class RedisAssignmentManager implements AssignmentManager {
   private Logger logger = LoggerFactory.getLogger(getClass());
 
-  private RedisTemplate<String, String> redisTemplate;
+  private StringRedisTemplate redisTemplate;
   private long assignmentTtlInMilliseconds;
 
-  public RedisAssignmentManager(RedisTemplate<String, String> redisTemplate, long assignmentTtlInMilliseconds) {
+  public RedisAssignmentManager(StringRedisTemplate redisTemplate, long assignmentTtlInMilliseconds) {
     this.redisTemplate = redisTemplate;
     this.assignmentTtlInMilliseconds = assignmentTtlInMilliseconds;
   }

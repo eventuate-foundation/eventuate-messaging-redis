@@ -4,6 +4,7 @@ import io.eventuate.messaging.partitionmanagement.MemberGroupManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +15,7 @@ import java.util.function.Consumer;
 public class RedisMemberGroupManager implements MemberGroupManager {
   private Logger logger = LoggerFactory.getLogger(getClass());
 
-  private RedisTemplate<String, String> redisTemplate;
+  private StringRedisTemplate redisTemplate;
   private String groupId;
   private String memberId;
   private long refreshPeriodInMilliseconds;
@@ -24,7 +25,7 @@ public class RedisMemberGroupManager implements MemberGroupManager {
   private String groupKey;
   private Set<String> checkedMembers;
 
-  public RedisMemberGroupManager(RedisTemplate<String, String> redisTemplate,
+  public RedisMemberGroupManager(StringRedisTemplate redisTemplate,
                                  String groupId,
                                  String memberId,
                                  long checkIntervalInMilliseconds,

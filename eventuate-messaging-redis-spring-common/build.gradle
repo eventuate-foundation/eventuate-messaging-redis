@@ -6,6 +6,8 @@ dependencies {
     api "io.lettuce:lettuce-core:$lettuceVersion"
     api "org.redisson:redisson:$redissonVersion"
     api "org.apache.commons:commons-lang3:$commonsLang3Version"
+    implementation "org.springframework.boot:spring-boot-starter:$springBootVersion"
+
     testImplementation "io.eventuate.util:eventuate-util-test:$eventuateUtilVersion"
     testImplementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
 }

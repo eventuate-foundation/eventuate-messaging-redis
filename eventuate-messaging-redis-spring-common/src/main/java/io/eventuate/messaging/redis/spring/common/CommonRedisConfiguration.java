@@ -1,5 +1,6 @@
 package io.eventuate.messaging.redis.spring.common;
 
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
@@ -7,6 +8,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
+@EnableAutoConfiguration
 public class CommonRedisConfiguration {
 
   @Bean
@@ -25,17 +27,6 @@ public class CommonRedisConfiguration {
     return new LettuceConnectionFactory(mainServer.getHost(), mainServer.getPort());
   }
 
-  @Bean
-  public RedisTemplate<String, String> redisTemplate(LettuceConnectionFactory lettuceConnectionFactory) {
-    StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-    RedisTemplate<String, String> template = new RedisTemplate<>();
-    template.setConnectionFactory(lettuceConnectionFactory);
-    template.setDefaultSerializer(stringRedisSerializer);
-    template.setKeySerializer(stringRedisSerializer);
-    template.setValueSerializer(stringRedisSerializer);
-    template.setHashKeySerializer(stringRedisSerializer);
-    return template;
-  }
 
   @Bean
   public RedissonClients redissonClients(RedisServers redisServers) {

@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.RedisSystemException;
 import org.springframework.data.redis.connection.stream.*;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.time.Duration;
 import java.util.List;
@@ -22,11 +23,11 @@ public class ChannelProcessor {
   private String subscriberId;
   private String channel;
   private RedisMessageHandler messageHandler;
-  private RedisTemplate<String, String> redisTemplate;
+  private StringRedisTemplate redisTemplate;
   private long timeInMillisecondsToSleepWhenKeyDoesNotExist;
   private long blockStreamTimeInMilliseconds;
 
-  public ChannelProcessor(RedisTemplate<String, String> redisTemplate,
+  public ChannelProcessor(StringRedisTemplate redisTemplate,
                           String subscriberId,
                           String channel,
                           RedisMessageHandler messageHandler,

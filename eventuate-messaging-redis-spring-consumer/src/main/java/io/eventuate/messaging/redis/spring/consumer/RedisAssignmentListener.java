@@ -6,6 +6,7 @@ import io.eventuate.messaging.partitionmanagement.AssignmentListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.util.Optional;
 import java.util.Timer;
@@ -15,7 +16,7 @@ import java.util.function.Consumer;
 public class RedisAssignmentListener implements AssignmentListener {
   private Logger logger = LoggerFactory.getLogger(getClass());
 
-  private RedisTemplate<String, String> redisTemplate;
+  private StringRedisTemplate redisTemplate;
   private Consumer<Assignment> assignmentUpdatedCallback;
   private long assignmentListenerInterval;
 
@@ -23,7 +24,7 @@ public class RedisAssignmentListener implements AssignmentListener {
   private Optional<Assignment> lastAssignment;
   private Timer timer = new Timer();
 
-  public RedisAssignmentListener(RedisTemplate<String, String> redisTemplate,
+  public RedisAssignmentListener(StringRedisTemplate redisTemplate,
                                  String groupId,
                                  String memberId,
                                  long assignmentListenerInterval,

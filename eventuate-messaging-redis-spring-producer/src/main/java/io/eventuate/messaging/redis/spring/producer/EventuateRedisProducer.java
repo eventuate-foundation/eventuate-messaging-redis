@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.connection.stream.StreamRecords;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
@@ -12,10 +13,10 @@ import java.util.concurrent.CompletableFuture;
 public class EventuateRedisProducer {
   private Logger logger = LoggerFactory.getLogger(getClass());
 
-  private RedisTemplate<String, String> redisTemplate;
+  private StringRedisTemplate redisTemplate;
   private int partitions;
 
-  public EventuateRedisProducer(RedisTemplate<String, String> redisTemplate, int partitions) {
+  public EventuateRedisProducer(StringRedisTemplate redisTemplate, int partitions) {
     this.redisTemplate = redisTemplate;
     this.partitions = partitions;
   }

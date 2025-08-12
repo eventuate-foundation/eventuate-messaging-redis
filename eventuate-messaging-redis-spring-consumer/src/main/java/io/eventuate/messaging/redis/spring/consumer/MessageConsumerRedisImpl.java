@@ -7,6 +7,7 @@ import io.eventuate.messaging.partitionmanagement.SubscriptionLifecycleHook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -19,14 +20,14 @@ public class MessageConsumerRedisImpl implements CommonMessageConsumer {
   public final String consumerId;
   private Supplier<String> subscriptionIdSupplier;
 
-  private RedisTemplate<String, String> redisTemplate;
+  private StringRedisTemplate redisTemplate;
 
   private ConcurrentLinkedQueue<Subscription> subscriptions = new ConcurrentLinkedQueue<>();
   private final CoordinatorFactory coordinatorFactory;
   private long timeInMillisecondsToSleepWhenKeyDoesNotExist;
   private long blockStreamTimeInMilliseconds;
 
-  public MessageConsumerRedisImpl(RedisTemplate<String, String> redisTemplate,
+  public MessageConsumerRedisImpl(StringRedisTemplate redisTemplate,
                                   CoordinatorFactory coordinatorFactory,
                                   long timeInMillisecondsToSleepWhenKeyDoesNotExist,
                                   long blockStreamTimeInMilliseconds) {
@@ -40,7 +41,7 @@ public class MessageConsumerRedisImpl implements CommonMessageConsumer {
 
   public MessageConsumerRedisImpl(Supplier<String> subscriptionIdSupplier,
                                   String consumerId,
-                                  RedisTemplate<String, String> redisTemplate,
+                                  StringRedisTemplate redisTemplate,
                                   CoordinatorFactory coordinatorFactory,
                                   long timeInMillisecondsToSleepWhenKeyDoesNotExist,
                                   long blockStreamTimeInMilliseconds) {

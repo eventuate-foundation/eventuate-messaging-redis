@@ -2,6 +2,7 @@ package io.eventuate.messaging.redis.spring.consumer;
 
 import io.eventuate.messaging.partitionmanagement.GroupMember;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -9,14 +10,14 @@ import java.util.concurrent.TimeUnit;
 
 public class RedisGroupMember implements GroupMember {
 
-  private RedisTemplate<String, String> redisTemplate;
+  private StringRedisTemplate redisTemplate;
   private String memberId;
   private long ttlInMilliseconds;
   private String groupKey;
   private String groupMemberKey;
   private Timer timer = new Timer();
 
-  public RedisGroupMember(RedisTemplate<String, String> redisTemplate,
+  public RedisGroupMember(StringRedisTemplate redisTemplate,
                           String groupId,
                           String memberId,
                           long ttlInMilliseconds) {

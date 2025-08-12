@@ -10,15 +10,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 @Configuration
 @Import(CommonRedisConfiguration.class)
 public class MessageConsumerRedisConfiguration {
 
   @Bean
-  public MessageConsumerRedisImpl messageConsumerRedis(RedisTemplate<String, String> redisTemplate,
-                                         CoordinatorFactory coordinatorFactory,
-                                         RedisConfigurationProperties redisConfigurationProperties) {
+  public MessageConsumerRedisImpl messageConsumerRedis(StringRedisTemplate redisTemplate,
+                                                       CoordinatorFactory coordinatorFactory,
+                                                       RedisConfigurationProperties redisConfigurationProperties) {
 
     return new MessageConsumerRedisImpl(redisTemplate,
             coordinatorFactory,
@@ -42,7 +43,7 @@ public class MessageConsumerRedisConfiguration {
   }
 
   @Bean
-  public GroupMemberFactory groupMemberFactory(RedisTemplate<String, String> redisTemplate,
+  public GroupMemberFactory groupMemberFactory(StringRedisTemplate redisTemplate,
                                                RedisConfigurationProperties redisConfigurationProperties) {
     return (groupId, memberId) ->
             new RedisGroupMember(redisTemplate,
@@ -64,7 +65,7 @@ public class MessageConsumerRedisConfiguration {
   }
 
   @Bean
-  public MemberGroupManagerFactory memberGroupManagerFactory(RedisTemplate<String, String> redisTemplate,
+  public MemberGroupManagerFactory memberGroupManagerFactory(StringRedisTemplate redisTemplate,
                                                              RedisConfigurationProperties redisConfigurationProperties) {
     return (groupId, memberId, groupMembersUpdatedCallback) ->
             new RedisMemberGroupManager(redisTemplate,
@@ -75,7 +76,7 @@ public class MessageConsumerRedisConfiguration {
   }
 
   @Bean
-  public AssignmentListenerFactory assignmentListenerFactory(RedisTemplate<String, String> redisTemplate,
+  public AssignmentListenerFactory assignmentListenerFactory(StringRedisTemplate redisTemplate,
                                                              RedisConfigurationProperties redisConfigurationProperties) {
     return (groupId, memberId, assignmentUpdatedCallback) ->
             new RedisAssignmentListener(redisTemplate,
@@ -86,7 +87,7 @@ public class MessageConsumerRedisConfiguration {
   }
 
   @Bean
-  public AssignmentManager assignmentManager(RedisTemplate<String, String> redisTemplate,
+  public AssignmentManager assignmentManager(StringRedisTemplate redisTemplate,
                                              RedisConfigurationProperties redisConfigurationProperties) {
     return new RedisAssignmentManager(redisTemplate, redisConfigurationProperties.getAssignmentTtlInMilliseconds());
   }

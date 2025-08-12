@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.Collections;
@@ -30,7 +31,7 @@ public class MessagingTest extends AbstractMessagingTest {
   }
 
   @Autowired
-  private RedisTemplate<String, String> redisTemplate;
+  private StringRedisTemplate redisTemplate;
 
   @Autowired
   private RedissonClients redissonClients;

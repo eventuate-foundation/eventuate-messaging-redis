@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.connection.stream.ReadOffset;
 import org.springframework.data.redis.connection.stream.StreamRecords;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class MessageConsumerRedisImplTest {
 
   @Autowired
-  private RedisTemplate<String, String> redisTemplate;
+  private StringRedisTemplate redisTemplate;
 
   @Autowired
   private RedisConfigurationProperties redisConfigurationProperties;
