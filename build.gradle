@@ -36,13 +36,26 @@ subprojects {
 
     dependencies {
         testImplementation(platform("org.springframework.boot:spring-boot-dependencies:$springBootVersion"))
-        testImplementation "org.mockito:mockito-core:4.11.0"
+        testImplementation "org.mockito:mockito-core:$mockitoVersion"
         testImplementation "org.junit.jupiter:junit-jupiter:$junitVersion"
         testRuntimeOnly "org.junit.platform:junit-platform-launcher:$junitPlatformLauncherVersion"
     }
 
-
-
+    // Configure test to run after dependencies' test tasks
+    project.afterEvaluate {
+        def testTask = project.tasks.findByName("test")
+        if (testTask) {
+            project.configurations.implementation.getAllDependencies().each { dep ->
+                if (dep.hasProperty('dependencyProject')) {
+                    def depProject = dep.dependencyProject
+                    def depTest = depProject.tasks.findByName("test")
+                    if (depTest) {
+                        testTask.shouldRunAfter(depTest)
+                    }
+                }
+            }
+        }
+    }
 
 }
 

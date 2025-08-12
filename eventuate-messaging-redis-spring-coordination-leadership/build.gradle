@@ -4,9 +4,9 @@ dependencies {
     api project(":eventuate-messaging-redis-spring-common")
 
     testImplementation "io.eventuate.common:eventuate-common-coordination-leadership-tests:$eventuateCommonVersion"
-    testImplementation 'com.google.guava:guava:19.0'
     testImplementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
 }
 tasks.withType(Test).configureEach {
     useJUnitPlatform()
+    forkEvery = 1
 }

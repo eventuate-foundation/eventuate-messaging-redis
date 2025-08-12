@@ -32,7 +32,7 @@ public class RedissonClients {
   private RedissonClient createRedissonClient(RedisServers.HostAndPort hostAndPort) {
     logger.info("Creating redisson client");
     Config config = new Config();
-    config.useSingleServer().setRetryAttempts(Integer.MAX_VALUE);
+    config.useSingleServer().setRetryAttempts(20);
     config.useSingleServer().setRetryInterval(100);
     config.useSingleServer().setAddress("redis://%s:%s".formatted(hostAndPort.getHost(), hostAndPort.getPort()));
     logger.info("Created redisson client");

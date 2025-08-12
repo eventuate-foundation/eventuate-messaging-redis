@@ -2,11 +2,10 @@
 dependencies {
     api "io.eventuate.common:eventuate-common-coordination-leadership:$eventuateCommonVersion"
 
-    api 'org.springframework.data:spring-data-redis:2.6.6'
-    api 'io.lettuce:lettuce-core:6.1.9.RELEASE'
-    api 'org.redisson:redisson:3.10.3'
-    api 'org.apache.commons:commons-lang3:3.12.0'
-    testImplementation 'com.google.guava:guava:19.0'
+    api "org.springframework.data:spring-data-redis:$springDataRedisVersion"
+    api "io.lettuce:lettuce-core:$lettuceVersion"
+    api "org.redisson:redisson:$redissonVersion"
+    api "org.apache.commons:commons-lang3:$commonsLang3Version"
     testImplementation "io.eventuate.util:eventuate-util-test:$eventuateUtilVersion"
     testImplementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
 }

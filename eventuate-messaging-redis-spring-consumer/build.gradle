@@ -4,7 +4,6 @@ dependencies {
     api project (':eventuate-messaging-redis-spring-coordination-leadership')
     api "io.eventuate.common:eventuate-common-json-mapper:$eventuateCommonVersion"
 
-    testImplementation 'com.google.guava:guava:19.0'
     testImplementation "io.eventuate.util:eventuate-util-test:$eventuateUtilVersion"
     testImplementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
 }
