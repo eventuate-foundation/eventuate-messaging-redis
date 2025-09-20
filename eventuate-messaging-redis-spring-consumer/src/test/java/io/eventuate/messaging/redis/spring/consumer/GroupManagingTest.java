@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.util.Collections;
@@ -16,6 +16,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @SpringBootTest(classes = CommonRedisConfiguration.class)
+@EnableAutoConfiguration
 public class GroupManagingTest {
 
   @Autowired
