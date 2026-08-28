@@ -2,12 +2,11 @@
 dependencies {
     api project(":eventuate-messaging-redis-spring-consumer")
     api project(":eventuate-messaging-redis-spring-producer")
-    api "io.eventuate.util:eventuate-util-test:$eventuateUtilVersion"
+    testImplementation "io.eventuate.util:eventuate-util-test:$eventuateUtilVersion"
     testImplementation "org.springframework.boot:spring-boot-starter-data-redis-test:$springBootVersion"
     testImplementation "io.eventuate.common.messaging:eventuate-messaging-partition-management-tests:$eventuateMessagingPartitionManagementVersion"
 }
 
 test {
     forkEvery 1
-    useJUnitPlatform()
 }
