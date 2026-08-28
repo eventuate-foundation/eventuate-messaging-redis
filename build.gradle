@@ -4,7 +4,6 @@ buildscript {
         maven {
           url "https://plugins.gradle.org/m2/"
         }
-        jcenter()
         eventuateMavenRepoUrl.split(',').each { repoUrl -> maven { url repoUrl } }
     }
     dependencies {
@@ -35,7 +34,6 @@ subprojects {
     }
 
     dependencies {
-        testImplementation(platform("org.springframework.boot:spring-boot-dependencies:$springBootVersion"))
         testImplementation "org.mockito:mockito-core:$mockitoVersion"
         testImplementation "org.junit.jupiter:junit-jupiter:$junitVersion"
         testRuntimeOnly "org.junit.platform:junit-platform-launcher:$junitPlatformLauncherVersion"
