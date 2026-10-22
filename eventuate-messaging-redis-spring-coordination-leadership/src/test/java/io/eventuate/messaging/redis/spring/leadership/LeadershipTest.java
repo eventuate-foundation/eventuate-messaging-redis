@@ -1,8 +1,8 @@
 package io.eventuate.messaging.redis.spring.leadership;
 
-import io.eventuate.coordination.leadership.LeaderSelectedCallback;
-import io.eventuate.coordination.leadership.tests.AbstractLeadershipTest;
-import io.eventuate.coordination.leadership.tests.SelectorUnderTest;
+import io.eventuate.common.coordination.leadership.LeaderSelectedCallback;
+import io.eventuate.common.coordination.leadership.tests.AbstractLeadershipTest;
+import io.eventuate.common.coordination.leadership.tests.SelectorUnderTest;
 import io.eventuate.messaging.redis.spring.common.CommonRedisConfiguration;
 import io.eventuate.messaging.redis.spring.common.RedissonClients;
 import org.junit.jupiter.api.BeforeEach;

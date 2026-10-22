@@ -3,7 +3,7 @@ dependencies {
     api platform("io.netty:netty-bom:$nettyVersion")
     api platform("com.fasterxml.jackson:jackson-bom:$jackson2Version")
 
-    api "io.eventuate.common:eventuate-common-coordination-leadership:$eventuateCommonVersion"
+    api "io.eventuate.common.coordination.leadership:eventuate-common-coordination-leadership:$eventuateCommonCoordinationLeadershipVersion"
 
     api "org.springframework.boot:spring-boot-starter-data-redis:$springBootVersion"
     api "org.redisson:redisson:$redissonVersion"

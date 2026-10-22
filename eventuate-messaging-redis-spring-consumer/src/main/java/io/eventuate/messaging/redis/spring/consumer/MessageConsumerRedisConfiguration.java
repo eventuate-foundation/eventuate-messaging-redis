@@ -1,6 +1,6 @@
 package io.eventuate.messaging.redis.spring.consumer;
 
-import io.eventuate.coordination.leadership.LeaderSelectorFactory;
+import io.eventuate.common.coordination.leadership.LeaderSelectorFactory;
 import io.eventuate.messaging.partitionmanagement.*;
 import io.eventuate.messaging.redis.spring.common.CommonRedisConfiguration;
 import io.eventuate.messaging.redis.spring.common.RedisConfigurationProperties;

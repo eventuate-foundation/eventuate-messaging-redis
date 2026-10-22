@@ -1,6 +1,6 @@
 package io.eventuate.messaging.redis.spring.leadership;
 
-import io.eventuate.coordination.leadership.LeadershipController;
+import io.eventuate.common.coordination.leadership.LeadershipController;
 
 import java.util.concurrent.CountDownLatch;
 

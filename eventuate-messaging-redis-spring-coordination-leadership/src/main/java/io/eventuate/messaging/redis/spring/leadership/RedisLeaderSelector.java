@@ -1,7 +1,7 @@
 package io.eventuate.messaging.redis.spring.leadership;
 
-import io.eventuate.coordination.leadership.EventuateLeaderSelector;
-import io.eventuate.coordination.leadership.LeaderSelectedCallback;
+import io.eventuate.common.coordination.leadership.EventuateLeaderSelector;
+import io.eventuate.common.coordination.leadership.LeaderSelectedCallback;
 import io.eventuate.messaging.redis.spring.common.RedissonClients;
 import org.redisson.RedissonRedLock;
 import org.redisson.api.RLock;
